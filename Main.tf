@@ -1,6 +1,6 @@
 provider "aws" {
   region     = var.region
-  profile = "posh"
+  profile = "ADEPEJU"
 }
 
 # Create a VPC
@@ -144,7 +144,7 @@ resource "aws_instance" "firstinstance" {
   instance_type          = "t2.micro"
   vpc_security_group_ids = [aws_security_group.allow_web.id]
   subnet_id              = aws_subnet.prodsubnet1.id
-  key_name               = "Virginia - 2024"
+  key_name               = "ADEBAYO"
   availability_zone      = "us-east-1a"
   user_data              =  "${file("install_jenkins.sh")}"
 
@@ -153,16 +153,6 @@ resource "aws_instance" "firstinstance" {
     Name = "Jenkins_Server"
   }
 }
-
-
-resource "aws_instance" "secondinstance" {
-  ami                    = data.aws_ami.ubuntu.id
-  instance_type          = "t2.micro"
-  vpc_security_group_ids = [aws_security_group.allow_web.id]
-  subnet_id              = aws_subnet.prodsubnet1.id
-  key_name               = "Virginia - 2024"
-  availability_zone      = "us-east-1a"
-  user_data              =  "${file("install_tomcat.sh")}"
   
 
 
@@ -178,8 +168,4 @@ output "Jenkins_website_url" {
   description = "Jenkins Server is firstinstance"
 }
 
-# print the url of the tomcat server
-output "Tomcat_website_url1" {
-  value     = join ("", ["http://", aws_instance.secondinstance.public_ip, ":", "8080"])
-  description = "Tomcat Server is secondinstance"
-}
+
